@@ -1,4 +1,27 @@
 <resources>
-    <string name="app_name">Android</string>
-    <string name="label_hello_world">Hello World</string>
+    <string name="app_name">TrainApp</string>
+    <string name="welcome_text">Пожалуй, лучший фитнес трекер в ДВФУ</string>
+    <string name="students_made">Созданный студентами\n 2-ого курса</string>
+    <string name="offer_registration_text">Зарегистрироваться</string>
+    <string name="offer_login_text">Войти</string>
+    <string name="have_account_text">Уже есть аккаунт?</string>
+    <string name="textRules">Нажимая на кнопку, вы соглашаетесь с политикой конфиденциальности и обработки персональных данных, а также принимаете пользовательское соглашение</string>
+
+    <string name="login">Логин</string>
+    <string name="entrance">Вход</string>
+    <string name="registration">Регистрация</string>
+
+    <string name="name">Имя или никнейм</string>
+    <string name="password">Пароль</string>
+    <string name="password_again">Повторите пароль</string>
+
+    <string name="registration_image_desc">Иллюстрация процесса регистрации</string>
+
+    <string-array name="genders">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
+    <string name="sex">Пол</string>
+    <string name="man">Мужской</string>
+    <string name="women">Женский</string>
 </resources>
