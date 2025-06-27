@@ -3,6 +3,7 @@ package ru.fefu.android
 import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -29,6 +30,10 @@ class RegistrationActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textRules).text = sps
         findViewById<ImageButton>(R.id.imageButton).setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<Button>(R.id.registerButton).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

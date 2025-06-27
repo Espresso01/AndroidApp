@@ -2,6 +2,7 @@ package ru.fefu.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,11 @@ class LoginActivity : AppCompatActivity() {
         }
         findViewById<ImageButton>(R.id.imageButton).setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.button).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

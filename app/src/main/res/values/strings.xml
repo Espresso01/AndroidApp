@@ -24,4 +24,11 @@
     <string name="sex">Пол</string>
     <string name="man">Мужской</string>
     <string name="women">Женский</string>
+
+    <string name="title_activity">Активность</string>
+    <string name="title_personal">Профиль</string>
+    <string name="blank">Мое</string>
+    <string name="blank2">Не мое</string>
+    <string name="title_my">Моя</string>
+    <string name="title_users">Пользователей</string>
 </resources>
