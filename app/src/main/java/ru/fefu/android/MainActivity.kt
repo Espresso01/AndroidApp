@@ -1,11 +1,12 @@
 package ru.fefu.android
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ru.fefu.android.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,8 +19,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+
+        when (menuItem.itemId) {
+            android.R.id.home -> {
+                supportFragmentManager.popBackStack()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(menuItem)
     }
 }

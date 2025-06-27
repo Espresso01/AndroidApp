@@ -31,4 +31,22 @@
     <string name="blank2">Не мое</string>
     <string name="title_my">Моя</string>
     <string name="title_users">Пользователей</string>
+
+    <string name="title_never">Никогда</string>
+    <string name="type_surfing">Серфинг</string>
+    <string name="type_bicycle">Велосипед</string>
+    <string name="type_jogging">Пробежка</string>
+    <string name="type_swing">Качели</string>
+    <string name="type_none">Пусто</string>
+    <string name="item_activity_text_length">1.00 км</string>
+    <string name="item_activity_text_time">1 часов 0 минут</string>
+    <string name="item_activity_text_date">0 секунд назад</string>
+    <string name="item_activity_text_email">\Ничего</string>
+    <string name="item_activity_text_start">07:11</string>
+    <string name="delete">Удалить</string>
+    <string name="share">Поделиться</string>
+    <string name="comment">Комментарий</string>
+    <string name="start">Старт</string>
+    <string name="delimiter">|</string>
+    <string name="finish">Финиш</string>
 </resources>

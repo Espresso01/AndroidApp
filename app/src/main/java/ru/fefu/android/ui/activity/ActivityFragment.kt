@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import ru.fefu.android.R
 import ru.fefu.android.databinding.FragmentActivityBinding
 import com.google.android.material.tabs.TabLayoutMediator
-
+import androidx.fragment.app.viewModels
+import ru.fefu.android.ui.activity.models.ActivityViewModel
 
 class ActivityFragment : Fragment() {
+    private val viewModel by viewModels<ActivityViewModel>()
     private val fragList =
         listOf(FragmentActivityMy.newInstance(), FragmentActivityAll.newInstance())
 
