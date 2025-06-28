@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:paddingHorizontal="16dp">
 
     <ImageView
         android:id="@+id/imageView"
@@ -28,6 +28,7 @@
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -35,26 +36,30 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/students_made"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_welcome" />
 
     <Button
         android:id="@+id/button_register"
         android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="14dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:padding="10dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"
         android:text="@string/offer_registration_text"
         android:textAllCaps="false"
         android:textSize="18sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -62,7 +67,9 @@
         android:id="@+id/text_offer_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"
         android:text="@string/have_account_text"
         android:textColor="@color/blue"
         android:textSize="18sp"

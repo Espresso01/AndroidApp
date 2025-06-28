@@ -1,27 +1,30 @@
 package ru.fefu.android.ui.activity
 
-import ItemClickListener
-import ListItemOnClickListener
+import ru.fefu.android.ui.activity.holders.ItemClickListener
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.fefu.android.R
 import ru.fefu.android.ui.activity.holders.ActivityViewHolder
-import ru.fefu.android.ui.activity.holders.ListItemViewHolder
+import ru.fefu.android.ui.ListItemViewHolder
 import ru.fefu.android.ui.activity.holders.TitleViewHolder
 import ru.fefu.android.ui.activity.models.ActivityUIModel
 import ru.fefu.android.ui.activity.models.ListItemUIModel
 
-private const val VIEW_TYPE_GROUP = 0
-private const val VIEW_TYPE_ACTIVITY = 1
+enum class ViewTypes(val type: Int) {
+    GROUP(0),
+    ACTIVITY(1)
+}
 
 class ListItemsAdapter(
     private val layoutInflater: LayoutInflater,
-    private val onClickListener: ListItemOnClickListener,
+    private val onClickListener: ListItemActivityOnClickListener,
 ) : RecyclerView.Adapter<ListItemViewHolder>() {
 
     private val dataList = mutableListOf<ListItemUIModel>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newDataList: List<ListItemUIModel>) {
         dataList.clear()
         dataList.addAll(newDataList)
@@ -30,17 +33,16 @@ class ListItemsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         return when (viewType) {
-            VIEW_TYPE_ACTIVITY -> {
+            ViewTypes.ACTIVITY.type -> {
                 val view = layoutInflater.inflate(R.layout.item_activity, parent, false)
                 ActivityViewHolder(view, object : ItemClickListener {
                     override fun oniItemClick(activityUIModel: ActivityUIModel) {
                         onClickListener.oniItemClick(activityUIModel)
                     }
-
                 })
             }
 
-            VIEW_TYPE_GROUP -> {
+            ViewTypes.GROUP.type -> {
                 val view = layoutInflater.inflate(R.layout.item_title, parent, false)
                 TitleViewHolder(view)
             }
@@ -50,8 +52,9 @@ class ListItemsAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (dataList[position]) {
-            is ListItemUIModel.Title -> VIEW_TYPE_GROUP
-            is ListItemUIModel.Activity -> VIEW_TYPE_ACTIVITY
+            is ListItemUIModel.Title -> ViewTypes.GROUP.type
+            is ListItemUIModel.Activity -> ViewTypes.ACTIVITY.type
+            else -> throw java.lang.IllegalArgumentException("Unknown Biew Type requested: ${dataList[position]}")
         }
     }
 

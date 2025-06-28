@@ -3,6 +3,7 @@ package ru.fefu.android.ui.activity.holders
 import android.view.View
 import android.widget.TextView
 import ru.fefu.android.R
+import ru.fefu.android.ui.ListItemViewHolder
 import ru.fefu.android.ui.activity.models.ListItemUIModel
 
 

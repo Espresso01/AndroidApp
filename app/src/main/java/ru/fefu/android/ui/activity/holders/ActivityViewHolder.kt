@@ -1,11 +1,9 @@
 package ru.fefu.android.ui.activity.holders
 
-import ItemClickListener
-import android.text.SpannableString
 import android.view.View
 import android.widget.TextView
 import ru.fefu.android.R
-import ru.fefu.android.Click
+import ru.fefu.android.ui.ListItemViewHolder
 import ru.fefu.android.ui.activity.models.ListItemUIModel
 
 class ActivityViewHolder(
@@ -28,13 +26,8 @@ class ActivityViewHolder(
         activityTimeView.text = activityUIModel.time
         activityTypeView.text = activityUIModel.type(containerView.context)
         activityDateView.text = activityUIModel.date
+        activityEmailView.text = activityUIModel.email
 
-        val span = Click(containerView.context, activityUIModel.email)
-        val sps = SpannableString(activityUIModel.email)
-        span.generate(
-            sps, activityUIModel.email, "https://www.youtube.com/watch?v=v-rWnobdpTM"
-        )
-        activityEmailView.text = sps
         containerView.setOnClickListener {
             onClickListener.oniItemClick(activityUIModel)
         }

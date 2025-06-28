@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import java.time.LocalDateTime
 
+@Suppress("PropertyName")
 data class ActivityUIModel(
     val _length: Int,
     val _time: Int,
     val _type: ActivityTypes,
     val _date: LocalDateTime,
-    val _email: String = "nickname",
+    val _email: String,
     val _comment: MutableLiveData<String>? = null,
 ) {
     private fun Double.format(digits: Int) = "%.${digits}f".format(this)

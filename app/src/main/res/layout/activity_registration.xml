@@ -135,7 +135,7 @@
     <Button
         android:id="@+id/registerButton"
         android:layout_width="350dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
         android:padding="10dp"
         android:text="@string/offer_registration_text"

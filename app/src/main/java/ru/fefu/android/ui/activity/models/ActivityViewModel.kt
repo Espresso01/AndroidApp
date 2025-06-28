@@ -13,27 +13,32 @@ class ActivityViewModel : ViewModel()  {
         value = listOf(
             ListItemUIModel.Activity(
                 ActivityUIModel(
-                    256, 10, ActivityTypes.JOGGING, LocalDateTime.now()
+                    256, 10, ActivityTypes.JOGGING, LocalDateTime.now(), "@bledniy"
                 )
             ),
             ListItemUIModel.Activity(
                 ActivityUIModel(
-                    33095, 458, ActivityTypes.SWING, LocalDateTime.now().plusDays(-1)
+                    33095, 458, ActivityTypes.SWING, LocalDateTime.now().plusDays(-1), "@marina_topskaya"
                 )
             ),
             ListItemUIModel.Activity(
                 ActivityUIModel(
-                    3017, 47, ActivityTypes.BICYCLE, LocalDateTime.now().plusDays(-7)
+                    3017, 47, ActivityTypes.BICYCLE, LocalDateTime.now().plusDays(-7), "@ogurets"
                 )
             ),
             ListItemUIModel.Activity(
                 ActivityUIModel(
-                    6000, 60, ActivityTypes.SURFING, LocalDateTime.now().plusDays(-30)
+                    6000, 60, ActivityTypes.SURFING, LocalDateTime.now().plusDays(-30), "@kaban"
                 )
             ),
             ListItemUIModel.Activity(
                 ActivityUIModel(
-                    4387, 50, ActivityTypes.BICYCLE, LocalDateTime.now().plusDays(-60)
+                    4387, 50, ActivityTypes.BICYCLE, LocalDateTime.now().plusDays(-60), "@apchi"
+                )
+            ),
+            ListItemUIModel.Activity(
+                ActivityUIModel(
+                    4387, 50, ActivityTypes.BICYCLE, LocalDateTime.now().plusDays(-60), "@karandash"
                 )
             )
         )
@@ -65,7 +70,7 @@ class ActivityViewModel : ViewModel()  {
         DateChecker("На этой неделе", { it.plusWeeks(1) > LocalDate.now() }),
         DateChecker("На прошлой неделе", { it.plusWeeks(2) > LocalDate.now() }),
         DateChecker("В этом месяце", { it.plusMonths(1) > LocalDate.now() }),
-        DateChecker("В предыдущем месяце", { it.plusMonths(2) > LocalDate.now() }),
+        DateChecker("В прошлом месяце", { it.plusMonths(2) > LocalDate.now() }),
         DateChecker("Ранее", { true })
     )
 }

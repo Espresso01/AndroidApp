@@ -1,13 +1,14 @@
 package ru.fefu.android.ui.activity
 
-import ListItemOnClickListener
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.fefu.android.R
+import ru.fefu.android.ui.activity.details.DetailsViewModel
 import ru.fefu.android.ui.activity.models.ActivityUIModel
 import ru.fefu.android.ui.activity.models.ActivityViewModel
 
@@ -17,13 +18,18 @@ abstract class ActivityFragmentRecycler : Fragment() {
     protected abstract fun updateRecyclerView(listItemsAdapter: ListItemsAdapter)
     protected fun createRecycler(view : View, inflater : LayoutInflater) : ListItemsAdapter {
         val listItemsAdapter by lazy {
-            ListItemsAdapter(inflater, object : ListItemOnClickListener {
+            ListItemsAdapter(inflater, object : ListItemActivityOnClickListener {
                 override fun oniItemClick(activityUIModel: ActivityUIModel) {
                     goToDetails(activityUIModel)
                 }
             })
         }
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_view)
+        val spacingPx = (8f * resources.displayMetrics.density).toInt()
+        val marginPx = (8f * resources.displayMetrics.density).toInt()
+
+        val dividerItemDecoration = VerticalSpaceItemDecoration(spacingPx, marginPx)
+        recyclerView.addItemDecoration(dividerItemDecoration)
         recyclerView.adapter = listItemsAdapter
         val linearLayoutManager = LinearLayoutManager(requireContext())
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -35,6 +41,8 @@ abstract class ActivityFragmentRecycler : Fragment() {
     abstract fun getDetails() : Fragment
 
     protected fun goToDetails(activityUIModel: ActivityUIModel) {
+        val detailsModel by activityViewModels<DetailsViewModel>()
+        detailsModel.activity.value = activityUIModel
         val details = getDetails()
         val transition = parentFragmentManager.beginTransaction()
         transition.replace(R.id.nav_host_fragment_activity_main, details)

@@ -13,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import ru.fefu.android.R
 import ru.fefu.android.databinding.FragmentActivityMyDetailsBinding
+import java.time.format.DateTimeFormatter
 
 
 class FragmentMyDetails : Fragment(), Toolbar.OnMenuItemClickListener {
+    private val detailsModel by activityViewModels<DetailsViewModel>()
     private var _binding: FragmentActivityMyDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -37,6 +39,17 @@ class FragmentMyDetails : Fragment(), Toolbar.OnMenuItemClickListener {
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
         (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.setOnMenuItemClickListener(this)
+        detailsModel.activity.observe(viewLifecycleOwner) {
+            toolbar.title = it.type(requireContext())
+            binding.itemActivityDate.text = it.date
+            binding.itemActivityTime.text = it.time
+            binding.itemActivityFinish.text = it._date.format(DateTimeFormatter.ofPattern("HH:mm"))
+            binding.itemActivityStart.text = it._date.plusMinutes((-it._time).toLong()).format(
+                DateTimeFormatter.ofPattern("HH:mm")
+            )
+            binding.itemActivityLength.text = it.length
+            binding.itemActivityComment.setText(it.comment)
+        }
         return root
     }
 
@@ -56,10 +69,13 @@ class FragmentMyDetails : Fragment(), Toolbar.OnMenuItemClickListener {
         inflater.inflate(R.menu.details_toolbar_menu, menu)
         menu.iterator().forEach {
             val icon = it.icon
-            icon?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue)
-                , PorterDuff.Mode.SRC_IN)
+            icon?.setColorFilter(resources.getColor(R.color.blue, requireContext().theme), PorterDuff.Mode.SRC_IN)
             it.icon = icon
         }
         super.onCreateOptionsMenu(menu, inflater)
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

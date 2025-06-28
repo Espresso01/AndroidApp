@@ -1,4 +1,4 @@
-package ru.fefu.android.ui.activity.holders
+package ru.fefu.android.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

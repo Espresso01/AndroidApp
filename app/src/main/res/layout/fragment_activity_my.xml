@@ -9,6 +9,8 @@
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"/>
+        android:paddingHorizontal="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp"/>
 
 </FrameLayout>

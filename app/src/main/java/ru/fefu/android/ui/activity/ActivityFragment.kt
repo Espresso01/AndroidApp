@@ -1,18 +1,19 @@
 package ru.fefu.android.ui.activity
 
+import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.fefu.android.R
+import ru.fefu.android.ActivityActivity
 import ru.fefu.android.databinding.FragmentActivityBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import androidx.fragment.app.viewModels
-import ru.fefu.android.ui.activity.models.ActivityViewModel
+
 
 class ActivityFragment : Fragment() {
-    private val viewModel by viewModels<ActivityViewModel>()
     private val fragList =
         listOf(FragmentActivityMy.newInstance(), FragmentActivityAll.newInstance())
 
@@ -32,6 +33,13 @@ class ActivityFragment : Fragment() {
         val fragTitleList = listOf(getString(R.string.title_my), getString(R.string.title_users))
         TabLayoutMediator(binding.tabLayout, binding.vp2) { tab, pos -> tab.text = fragTitleList[pos]
         }.attach()
+        binding.startActivityButton.apply{
+            setColorFilter(resources.getColor(R.color.white, requireContext().theme), PorterDuff.Mode.SRC_IN)
+            setOnClickListener{
+                val intent = Intent(requireContext(), ActivityActivity::class.java)
+                startActivity(intent)
+            }
+        }
         return root
     }
 
