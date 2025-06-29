@@ -4,13 +4,15 @@ import androidx.core.util.Predicate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.fefu.android.data.Activity
 import ru.fefu.android.ui.activity.DateChecker
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 class ActivityViewModel : ViewModel()  {
-    private val _activities = MutableLiveData<List<ListItemUIModel.Activity>>().apply {
-        value = listOf(
+    private val _activities = MutableLiveData<ArrayList<ListItemUIModel.Activity>>().apply {
+        value = arrayListOf(
             ListItemUIModel.Activity(
                 ActivityUIModel(
                     256, 10, ActivityTypes.JOGGING, LocalDateTime.now(), "@bledniy"
@@ -44,6 +46,21 @@ class ActivityViewModel : ViewModel()  {
         )
     }
 
+    fun updateActivities(activities: List<Activity>) {
+        val list = _activities.value
+        list?.let {
+            it.removeIf { v -> v.data._email == "nickname" }
+            it.addAll(activities.map { activity ->
+                ListItemUIModel.Activity(
+                    ActivityUIModel(
+                        activity.length, ChronoUnit.MINUTES.between(activity.startDateTime, activity.finishDateTime).toInt() , activity.type, activity.startDateTime, id = activity.id
+                    )
+                )
+            })
+        }
+        _activities.postValue(list)
+    }
+
     fun getRecyclerList(predicate: Predicate<ListItemUIModel.Activity>) : List<ListItemUIModel> {
         val recyclerList = arrayListOf<ListItemUIModel>()
         val prepList = activities.value?.filter { predicate.test(it) }?.sortedBy { it.data._date }?.reversed() ?: emptyList()
@@ -62,7 +79,7 @@ class ActivityViewModel : ViewModel()  {
         return recyclerList
     }
 
-    val activities: LiveData<List<ListItemUIModel.Activity>> = _activities
+    val activities: LiveData<ArrayList<ListItemUIModel.Activity>> = _activities
 
     val groups = listOf(
         DateChecker("Сегодня", { it == LocalDate.now() }),

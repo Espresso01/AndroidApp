@@ -9,18 +9,21 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import ru.fefu.android.R
+import ru.fefu.android.data.ActivityViewModel
 import ru.fefu.android.databinding.FragmentActivityMyDetailsBinding
 import java.time.format.DateTimeFormatter
 
 
 class FragmentMyDetails : Fragment(), Toolbar.OnMenuItemClickListener {
     private val detailsModel by activityViewModels<DetailsViewModel>()
+    private val viewModel by activityViewModels<ActivityViewModel>()
     private var _binding: FragmentActivityMyDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -54,11 +57,29 @@ class FragmentMyDetails : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
-        Toast.makeText(requireContext(), "U should add listeners", Toast.LENGTH_LONG).show()
         when (item.itemId) {
             android.R.id.home -> {
                 Toast.makeText(requireContext(), "I don't know how that's happened", Toast.LENGTH_LONG).show()
                 return true
+            }
+            R.id.delete -> {
+                AlertDialog.Builder(requireContext()).apply {
+                    setPositiveButton("Да") { _, _ ->
+                        detailsModel.id.value?.let {
+                            viewModel.deleteActivityById(it)
+                            Toast.makeText(
+                                requireContext(),
+                                "Активность удалена",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        parentFragmentManager.popBackStack()
+                    }
+                    setNegativeButton("Нет") { _, _ ->
+
+                    }
+                }.setTitle("Удалить активность?")
+                    .setMessage("Вы уверены, что хотите удалить активность?").create().show()
             }
         }
         return super.onContextItemSelected(item)

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import ru.fefu.android.R
-import ru.fefu.android.ui.activity.details.FragmentMyDetails
-import ru.fefu.android.ui.activity.models.ActivityUIModel
 import ru.fefu.android.ui.activity.models.ListItemUIModel
 
 class FragmentActivityMy : ActivityFragmentRecycler() {
@@ -15,20 +12,13 @@ class FragmentActivityMy : ActivityFragmentRecycler() {
         val recyclerList = viewModel.getRecyclerList { it.data._email == "nickname" }
         listItemsAdapter.setData(recyclerList.map { activity ->
             if (activity is ListItemUIModel.Activity) ListItemUIModel.Activity(
-                ActivityUIModel(
-                    activity.data._length,
-                    activity.data._time,
-                    activity.data._type,
-                    activity.data._date,
-                    "",
-                    activity.data._comment
-                )
+                activity.data.copy(_email = "")
             ) else activity
         })
     }
 
-    override fun getDetails(): Fragment {
-        return FragmentMyDetails()
+    override fun detailsNavigation(): Int {
+        return R.id.action_navigation_activity_to_navigation_my_details
     }
 
     override fun onCreateView(

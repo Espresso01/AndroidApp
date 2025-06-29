@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import ru.fefu.android.R
-import ru.fefu.android.ui.activity.details.FragmentAllDetails
 
 class FragmentActivityAll : ActivityFragmentRecycler() {
     override fun updateRecyclerView(listItemsAdapter: ListItemsAdapter) {
@@ -23,8 +21,8 @@ class FragmentActivityAll : ActivityFragmentRecycler() {
         return view
     }
 
-    override fun getDetails(): Fragment {
-        return FragmentAllDetails()
+    override fun detailsNavigation(): Int {
+        return R.id.action_navigation_activity_to_navigation_all_details
     }
 
     companion object {

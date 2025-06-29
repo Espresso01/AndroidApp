@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import ru.fefu.android.R
 import ru.fefu.android.ui.activity.models.ListItemUIModel
 import java.time.LocalDateTime
+import kotlin.random.Random
 
 class StartActivityFragment : Fragment() {
 
@@ -68,7 +69,7 @@ class StartActivityFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
         listItemsAdapter.setData((0..<viewModel.typeList.size).map {
             ListItemUIModel.Type(
-                viewModel.typeList[it],
+                viewModel.formattedType(requireContext(), it),
                 if (it == viewModel.typeId.value) {
                     ContextCompat.getColor(requireContext(), R.color.blue)
                 } else {
@@ -79,6 +80,7 @@ class StartActivityFragment : Fragment() {
 
         view.findViewById<Button>(R.id.start_activity).setOnClickListener {
             viewModel.apply {
+                length.postValue(Random.nextInt(1,5000))
                 start.postValue(LocalDateTime.now())
             }
             parentFragmentManager.beginTransaction()
